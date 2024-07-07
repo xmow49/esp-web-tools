@@ -197,9 +197,7 @@ export class EwtInstallDialog extends LitElement {
                   @click=${() => {
                     if (this._isSameFirmware) {
                       this._startInstall(false);
-                    } else if (this._manifest.new_install_prompt_erase) {
-                      this._state = "ASK_ERASE";
-                    } else {
+                    }else {
                       this._startInstall(true);
                     }
                   }}
@@ -311,12 +309,8 @@ export class EwtInstallDialog extends LitElement {
           <ew-list-item
             type="button"
             @click=${() => {
-              if (this._manifest.new_install_prompt_erase) {
-                this._state = "ASK_ERASE";
-              } else {
                 // Default is to erase a device that does not support Improv Serial
                 this._startInstall(true);
-              }
             }}
           >
             ${listItemInstallIcon}
@@ -898,7 +892,7 @@ export class EwtInstallDialog extends LitElement {
 
   private _startInstall(erase: boolean) {
     this._state = "INSTALL";
-    this._installErase = erase;
+    this._installErase = false;
     this._installConfirmed = false;
   }
 
